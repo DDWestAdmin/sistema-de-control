@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1036654274875",
+    "project_id": "registrocontrol",
+    "storage_bucket": "registrocontrol.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036654274875:android:c54cf4c90b0492670d6f1e",
+        "android_client_info": {
+          "package_name": "com.example.sistemadecontrol"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOEY90nLTGW1IzjEq_8Qp-t8ONGjQas94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

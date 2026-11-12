@@ -9,13 +9,19 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 
 class MainActivity : AppCompatActivity() {
     private var isUnlocked = false
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Inicializar el cliente Firebase Firestore
+        db = FirebaseFirestore.getInstance()
 
         val etPanelSmartLock = findViewById<TextView>(R.id.etpanelsmartlock)
         val etPanelStatus = findViewById<TextView>(R.id.etpanelstatus)
@@ -30,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             if (isUnlocked) {
                 isUnlocked = false
                 etPanelStatus.text = "ESTADO: CERRADO"
-                etPanelStatus.setTextColor(resources.getColor(R.color.red))
+                etPanelStatus.setTextColor(resources.getColor(R.color.red, theme))
                 etPanelSmartLock.text = "Desbloquear Puerta"
                 etPuerta.text = "Desbloquear"
                 Toast.makeText(this, "Puerta Bloqueada", Toast.LENGTH_SHORT).show()
@@ -45,19 +51,43 @@ class MainActivity : AppCompatActivity() {
 
                 builder.setPositiveButton("Desbloquear") { dialog, _ ->
                     val cardNumber = input.text.toString().trim()
-                    val registeredCard = trabajadorActivity.listaTrabajadores.find { it.numeroTarjeta == cardNumber }
 
-                    if (registeredCard != null) {
-                        isUnlocked = true
-                        etPanelStatus.text = "ESTADO: ABIERTO"
-                        etPanelStatus.setTextColor(resources.getColor(R.color.green))
-                        etPanelSmartLock.text = "Bloquear Puerta"
-                        etPuerta.text = "Bloquear"
-                        Toast.makeText(this, "Puerta Desbloqueada - Bienvenid@ ${registeredCard.nombre}", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "Tarjeta no registrada o inválida", Toast.LENGTH_SHORT).show()
+                    if (cardNumber.isEmpty()) {
+                        Toast.makeText(this, "Debe ingresar un número de tarjeta", Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
                     }
-                    dialog.dismiss()
+
+                    // Consultar en Firebase Firestore si existe el número de tarjeta en "trabajadores"
+                    db.collection("trabajadores").document(cardNumber).get(Source.SERVER)
+                        .addOnSuccessListener { documento ->
+                            if (documento.exists()) {
+                                val nombre = documento.getString("nombre") ?: "Trabajador"
+                                isUnlocked = true
+                                etPanelStatus.text = "ESTADO: ABIERTO"
+                                etPanelStatus.setTextColor(resources.getColor(R.color.green, theme))
+                                etPanelSmartLock.text = "Bloquear Puerta"
+                                etPuerta.text = "Bloquear"
+                                Toast.makeText(this, "Puerta Desbloqueada - Bienvenid@ $nombre", Toast.LENGTH_SHORT).show()
+                            } else {
+                                // Buscar alternativamente en la lista en memoria como fallback
+                                val registeredCard = trabajadorActivity.listaTrabajadores.find { it.numeroTarjeta == cardNumber }
+                                if (registeredCard != null) {
+                                    isUnlocked = true
+                                    etPanelStatus.text = "ESTADO: ABIERTO"
+                                    etPanelStatus.setTextColor(resources.getColor(R.color.green, theme))
+                                    etPanelSmartLock.text = "Bloquear Puerta"
+                                    etPuerta.text = "Bloquear"
+                                    Toast.makeText(this, "Puerta Desbloqueada - Bienvenid@ ${registeredCard.nombre}", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(this, "Tarjeta no registrada o inválida en Firebase", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            dialog.dismiss()
+                        }
+                        .addOnFailureListener { error ->
+                            Toast.makeText(this, "Error al consultar Firebase: ${error.message}", Toast.LENGTH_SHORT).show()
+                            dialog.dismiss()
+                        }
                 }
                 builder.setNegativeButton("Cancelar") { dialog, _ ->
                     dialog.cancel()
@@ -75,8 +105,9 @@ class MainActivity : AppCompatActivity() {
         // Boton Acceso Gestor de Tarjetas (Solo Admin)
         etTarjetas.setOnClickListener {
             if (esAdmin) {
-                val intent = Intent(this, tarjetasActivity::class.java)
-                intent.putExtra("ES_ADMIN", true)
+                val intent = Intent(this, tarjetasActivity::class.java).apply {
+                    putExtra("ES_ADMIN", true)
+                }
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Acceso sólo Administrador", Toast.LENGTH_SHORT).show()
