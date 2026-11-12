@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/etpaneltarjetas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PANEL GESTOR TARJETAS"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="80dp"/>
+
+    <Button
+        android:id="@+id/ethistorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Historial de Tarjetas"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp" />
+
+    <Button
+        android:id="@+id/etnuevatajeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nueva Tarjeta"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp"/>
+
+    <Button
+        android:id="@+id/etborrartarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Tarjeta"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp"/>
+
+    <Button
+        android:id="@+id/etvolver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver a Inicio"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp" />
+</LinearLayout>

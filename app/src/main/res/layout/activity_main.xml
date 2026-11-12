@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="top">
+
+    <TextView
+        android:id="@+id/etpanelsmartlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PANEL SMARTLOCK"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"/>
+
+    <TextView
+        android:id="@+id/etpanelstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ESTADO:CERRADO"
+        android:textColor="@color/red"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:layout_marginTop="80dp"/>
+
+    <Button
+        android:id="@+id/etpuerta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desbloquear"
+        android:layout_marginTop="32dp"/>
+
+    <Button
+        android:id="@+id/etlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar Sesión"
+        android:layout_marginTop="180dp"/>
+
+    <Button
+        android:id="@+id/ettarjetas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestor de Tarjetas"
+        android:layout_marginTop="18dp"/>
+
+    <Button
+        android:id="@+id/etlogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cerrar sesión"
+        android:layout_marginTop="18dp"/>
+
+</LinearLayout>

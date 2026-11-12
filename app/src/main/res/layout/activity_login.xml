@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="top">
+
+    <EditText
+        android:id="@+id/etsmartlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMARTLOCK ADMINISTRADOR"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <EditText
+        android:id="@+id/etcorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su Correo Electrónico"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="18dp"/>
+
+    <EditText
+        android:id="@+id/etcontrasenna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:hint="Ingrese su Contraseña"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/etbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingresar"/>
+
+    <Button
+        android:id="@+id/etborrador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vacíar Campos"/>
+
+    <Button
+        android:id="@+id/etinicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver a Inicio"/>
+</LinearLayout>
