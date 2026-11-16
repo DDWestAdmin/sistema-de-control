@@ -4,15 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="top">
+    android:background="@drawable/fondo_sistema_control">
 
     <EditText
         android:id="@+id/etsmartlock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SMARTLOCK ADMINISTRADOR"
+        android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"/>
 
     <EditText

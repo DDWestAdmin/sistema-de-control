@@ -4,17 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="18dp"
+    android:background="@drawable/fondo_sistema_control">
 
     <TextView
         android:id="@+id/etpaneltrabajador"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PANEL DE TRABAJADOR"
+        android:textColor="@color/white"
         android:textSize="32dp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"/>
 
     <EditText
         android:id="@+id/etnumerotarjeta"

@@ -4,16 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="top">
+    android:background="@drawable/fondo_sistema_control">
 
     <TextView
         android:id="@+id/etpanelsmartlock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PANEL SMARTLOCK"
+        android:textColor="@color/white"
         android:textSize="32dp"
         android:textStyle="bold"
-        android:layout_marginTop="18dp"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="28dp"/>
 
     <TextView
         android:id="@+id/etpanelstatus"
@@ -21,6 +23,7 @@
         android:layout_height="wrap_content"
         android:text="ESTADO:CERRADO"
         android:textColor="@color/red"
+        android:layout_gravity="center_horizontal"
         android:textSize="32dp"
         android:textStyle="bold"
         android:layout_marginTop="80dp"/>
