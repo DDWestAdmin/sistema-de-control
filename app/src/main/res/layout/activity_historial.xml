@@ -14,8 +14,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
         android:text="HISTORIAL DE REGISTRO"
+        android:fontFamily="@font/orbitron_black"
         android:textColor="@color/white"
-        android:textSize="32dp"
+        android:textSize="26dp"
         android:textStyle="bold"/>
 
     <ScrollView
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:textColor="@color/white"
+            android:fontFamily="@font/orbitron_black"
             android:lineSpacingExtra="8dp"/>
     </ScrollView>
 
@@ -37,5 +39,6 @@
         android:id="@+id/etvolvertarjetas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/orbitron_black"
         android:text="Volver"/>
 </LinearLayout>

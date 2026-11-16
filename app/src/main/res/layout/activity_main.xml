@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:text="PANEL SMARTLOCK"
         android:textColor="@color/white"
-        android:textSize="32dp"
+        android:textSize="30dp"
+        android:fontFamily="@font/orbitron_black"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="28dp"/>
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ESTADO:CERRADO"
+        android:fontFamily="@font/orbitron_black"
         android:textColor="@color/red"
         android:layout_gravity="center_horizontal"
         android:textSize="32dp"
@@ -33,20 +35,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Desbloquear"
-        android:layout_marginTop="32dp"/>
+        android:fontFamily="@font/orbitron_black"
+        android:layout_marginTop="28dp"/>
 
     <Button
         android:id="@+id/etlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
-        android:layout_marginTop="180dp"/>
+        android:fontFamily="@font/orbitron_black"
+        android:layout_marginTop="80dp"/>
 
     <Button
         android:id="@+id/ettarjetas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Gestor de Tarjetas"
+        android:fontFamily="@font/orbitron_black"
         android:layout_marginTop="18dp"/>
 
     <Button
@@ -54,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cerrar sesión"
+        android:fontFamily="@font/orbitron_black"
         android:layout_marginTop="18dp"/>
 
 </LinearLayout>
