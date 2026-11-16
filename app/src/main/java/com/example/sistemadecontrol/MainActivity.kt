@@ -9,8 +9,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private var isUnlocked = false
@@ -62,22 +66,52 @@ class MainActivity : AppCompatActivity() {
                         .addOnSuccessListener { documento ->
                             if (documento.exists()) {
                                 val nombre = documento.getString("nombre") ?: "Trabajador"
+                                val apellido = documento.getString("apellido") ?: ""
+                                val cargo = documento.getString("cargo") ?: ""
+                                val fechaHoraActual = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(Date())
+
                                 isUnlocked = true
                                 etPanelStatus.text = "ESTADO: ABIERTO"
                                 etPanelStatus.setTextColor(resources.getColor(R.color.green, theme))
                                 etPanelSmartLock.text = "Bloquear Puerta"
                                 etPuerta.text = "Bloquear"
                                 Toast.makeText(this, "Puerta Desbloqueada - Bienvenid@ $nombre", Toast.LENGTH_SHORT).show()
+
+                                // Registrar ingreso en la colección "historial" de Firebase
+                                val registroHistorial = hashMapOf(
+                                    "numeroTarjeta" to cardNumber,
+                                    "nombre" to nombre,
+                                    "apellido" to apellido,
+                                    "cargo" to cargo,
+                                    "fechaIngreso" to fechaHoraActual,
+                                    "timestamp" to Timestamp.now()
+                                )
+
+                                db.collection("historial").add(registroHistorial)
                             } else {
                                 // Buscar alternativamente en la lista en memoria como fallback
                                 val registeredCard = trabajadorActivity.listaTrabajadores.find { it.numeroTarjeta == cardNumber }
                                 if (registeredCard != null) {
+                                    val fechaHoraActual = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(Date())
+
                                     isUnlocked = true
                                     etPanelStatus.text = "ESTADO: ABIERTO"
                                     etPanelStatus.setTextColor(resources.getColor(R.color.green, theme))
                                     etPanelSmartLock.text = "Bloquear Puerta"
                                     etPuerta.text = "Bloquear"
                                     Toast.makeText(this, "Puerta Desbloqueada - Bienvenid@ ${registeredCard.nombre}", Toast.LENGTH_SHORT).show()
+
+                                    // Registrar ingreso en la colección "historial" de Firebase
+                                    val registroHistorial = hashMapOf(
+                                        "numeroTarjeta" to cardNumber,
+                                        "nombre" to registeredCard.nombre,
+                                        "apellido" to registeredCard.apellido,
+                                        "cargo" to registeredCard.cargo,
+                                        "fechaIngreso" to fechaHoraActual,
+                                        "timestamp" to Timestamp.now()
+                                    )
+
+                                    db.collection("historial").add(registroHistorial)
                                 } else {
                                     Toast.makeText(this, "Tarjeta no registrada o inválida en Firebase", Toast.LENGTH_SHORT).show()
                                 }

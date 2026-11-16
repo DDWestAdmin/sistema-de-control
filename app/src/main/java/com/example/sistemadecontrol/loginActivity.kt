@@ -53,7 +53,7 @@ class loginActivity : AppCompatActivity() {
                         }
                         startActivity(intent)
                         finish()
-                    } else if (correo == "Administrador" && contrasenna == "Admin1234") {
+                    } else if (correo == "administrador@correo.cl" && contrasenna == "Admin1234") {
                         // Credenciales por defecto para Administrador
                         Toast.makeText(this, "Credenciales correctas Administrador", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java).apply {
@@ -67,7 +67,7 @@ class loginActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { error ->
                     // Fallback a credenciales por defecto si no hay conexión a servidor
-                    if (correo == "Administrador" && contrasenna == "Admin1234") {
+                    if (correo == "administrador@correo.cl" && contrasenna == "Admin1234") {
                         Toast.makeText(this, "Credenciales correctas Administrador", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java).apply {
                             putExtra("ES_ADMIN", true)

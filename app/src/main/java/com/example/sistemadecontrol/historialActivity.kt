@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.Source
 
 class historialActivity : AppCompatActivity() {
@@ -27,32 +28,20 @@ class historialActivity : AppCompatActivity() {
 
         etHistorial.text = "Consultando Firebase..."
 
-        // Solicitar a Firestore los registros de la colección "trabajadores"
-        db.collection("trabajadores").get(Source.SERVER)
+        // Solicitar a Firestore los registros de la colección "historial"
+        db.collection("historial").get(Source.SERVER)
             .addOnSuccessListener { documentos ->
-                val historial = StringBuilder()
-
-                for (documento in documentos) {
-                    val numeroTarjeta = documento.getString("numeroTarjeta") ?: documento.id
-                    val nombre = documento.getString("nombre") ?: ""
-                    val apellido = documento.getString("apellido") ?: ""
-                    val cargo = documento.getString("cargo") ?: ""
-                    val fechaIngreso = documento.getString("fechaIngreso") ?: ""
-                    val fechaSalida = documento.getString("fechaSalida") ?: ""
-
-                    historial.append("--------------------------------------------------------\n\n")
-                    historial.append("Número de Tarjeta: $numeroTarjeta\n")
-                    historial.append("Nombre: $nombre || Apellido: $apellido\n")
-                    historial.append("Cargo: $cargo\n")
-                    historial.append("Fecha de Ingreso: $fechaIngreso\n")
-                    historial.append("Fecha de Salida: $fechaSalida\n\n")
-                    historial.append("--------------------------------------------------------\n\n")
-                }
-
-                etHistorial.text = if (historial.isEmpty()) {
-                    "No existen registros en Firebase"
+                if (!documentos.isEmpty) {
+                    mostrarRegistros(documentos, etHistorial)
                 } else {
-                    historial.toString()
+                    // Fallback a colección "trabajadores" si aún no hay ingresos registrados
+                    db.collection("trabajadores").get(Source.SERVER)
+                        .addOnSuccessListener { docsTrabajadores ->
+                            mostrarRegistros(docsTrabajadores, etHistorial)
+                        }
+                        .addOnFailureListener {
+                            etHistorial.text = "No existen registros de ingreso en Firebase"
+                        }
                 }
             }
             .addOnFailureListener { error ->
@@ -67,6 +56,31 @@ class historialActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
+        }
+    }
+
+    private fun mostrarRegistros(documentos: QuerySnapshot, etHistorial: TextView) {
+        val historial = StringBuilder()
+
+        for (documento in documentos) {
+            val numeroTarjeta = documento.getString("numeroTarjeta") ?: documento.id
+            val nombre = documento.getString("nombre") ?: ""
+            val apellido = documento.getString("apellido") ?: ""
+            val cargo = documento.getString("cargo") ?: ""
+            val fechaIngreso = documento.getString("fechaIngreso") ?: documento.getString("fechaHoraIngreso") ?: "No registrada"
+
+            historial.append("--------------------------------------------------------\n\n")
+            historial.append("Número de Tarjeta: $numeroTarjeta\n")
+            historial.append("Nombre: $nombre || Apellido: $apellido\n")
+            historial.append("Cargo: $cargo\n")
+            historial.append("Fecha/Hora de Ingreso: $fechaIngreso\n\n")
+            historial.append("--------------------------------------------------------\n\n")
+        }
+
+        etHistorial.text = if (historial.isEmpty()) {
+            "No existen registros en Firebase"
+        } else {
+            historial.toString()
         }
     }
 }

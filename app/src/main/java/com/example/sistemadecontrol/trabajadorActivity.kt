@@ -14,9 +14,7 @@ data class Trabajador(
     val numeroTarjeta: String = "",
     val nombre: String = "",
     val apellido: String = "",
-    val cargo: String = "",
-    val fechaIngreso: String = "",
-    val fechaSalida: String = ""
+    val cargo: String = ""
 )
 
 class trabajadorActivity : AppCompatActivity() {
@@ -43,8 +41,6 @@ class trabajadorActivity : AppCompatActivity() {
         val etNombre = findViewById<EditText>(R.id.etnombre)
         val etApellido = findViewById<EditText>(R.id.etapellido)
         val etCargo = findViewById<EditText>(R.id.etcargo)
-        val etFechaIngreso = findViewById<EditText>(R.id.etfechaingreso)
-        val etFechaSalida = findViewById<EditText>(R.id.etfechasalida)
         val etGuardar = findViewById<Button>(R.id.etguardar)
         val etVaciar = findViewById<Button>(R.id.etvaciar)
         val etVolver = findViewById<Button>(R.id.etvolvertarjetas)
@@ -55,8 +51,6 @@ class trabajadorActivity : AppCompatActivity() {
             etNombre.visibility = View.GONE
             etApellido.visibility = View.GONE
             etCargo.visibility = View.GONE
-            etFechaIngreso.visibility = View.GONE
-            etFechaSalida.visibility = View.GONE
         }
 
         etGuardar.setOnClickListener {
@@ -85,29 +79,25 @@ class trabajadorActivity : AppCompatActivity() {
                 val nombre = etNombre.text.toString().trim()
                 val apellido = etApellido.text.toString().trim()
                 val cargo = etCargo.text.toString().trim()
-                val fechaIngreso = etFechaIngreso.text.toString().trim()
-                val fechaSalida = etFechaSalida.text.toString().trim()
 
                 if (numeroTarjeta.isNotEmpty() && nombre.isNotEmpty()
-                    && apellido.isNotEmpty() && cargo.isNotEmpty() && fechaIngreso.isNotEmpty() && fechaSalida.isNotEmpty()) {
+                    && apellido.isNotEmpty() && cargo.isNotEmpty()) {
 
                     val persona = hashMapOf(
                         "numeroTarjeta" to numeroTarjeta,
                         "nombre" to nombre,
                         "apellido" to apellido,
-                        "cargo" to cargo,
-                        "fechaIngreso" to fechaIngreso,
-                        "fechaSalida" to fechaSalida
+                        "cargo" to cargo
                     )
 
                     db.collection("trabajadores").document(numeroTarjeta).set(persona)
                         .addOnSuccessListener {
                             val nuevoTrabajador = Trabajador(
-                                numeroTarjeta, nombre, apellido, cargo, fechaIngreso, fechaSalida
+                                numeroTarjeta, nombre, apellido, cargo
                             )
                             listaTrabajadores.add(nuevoTrabajador)
                             Toast.makeText(this, "Guardado correctamente en Firebase", Toast.LENGTH_SHORT).show()
-                            limpiarCampos(etNumeroTarjeta, etNombre, etApellido, etCargo, etFechaIngreso, etFechaSalida)
+                            limpiarCampos(etNumeroTarjeta, etNombre, etApellido, etCargo)
                         }
                         .addOnFailureListener { error ->
                             Toast.makeText(this, "Error al guardar en Firebase: ${error.message}", Toast.LENGTH_LONG).show()
@@ -119,7 +109,7 @@ class trabajadorActivity : AppCompatActivity() {
         }
 
         etVaciar.setOnClickListener {
-            limpiarCampos(etNumeroTarjeta, etNombre, etApellido, etCargo, etFechaIngreso, etFechaSalida)
+            limpiarCampos(etNumeroTarjeta, etNombre, etApellido, etCargo)
         }
 
         etVolver.setOnClickListener {
