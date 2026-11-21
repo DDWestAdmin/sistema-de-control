@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -18,6 +19,7 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private var isUnlocked = false
+    private var esAdmin = false
     private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +35,26 @@ class MainActivity : AppCompatActivity() {
         val etLogin = findViewById<Button>(R.id.etlogin)
         val etLogout = findViewById<Button>(R.id.etlogout)
         val etTarjetas = findViewById<Button>(R.id.ettarjetas)
-        val esAdmin = intent.getBooleanExtra("ES_ADMIN", false)
+
+        esAdmin = intent.getBooleanExtra("ES_ADMIN", false)
+        val sesionIniciada = intent.getBooleanExtra("SESION_INICIADA", false)
+        val nombreUsuario = intent.getStringExtra("NOMBRE_USUARIO") ?: ""
+
+        // Manejo de visibilidad de botones y mensaje desplegable de bienvenida al iniciar sesión
+        if (sesionIniciada && nombreUsuario.isNotEmpty()) {
+            etLogin.visibility = View.GONE
+            etLogout.visibility = View.VISIBLE
+
+            // Mensaje desplegable de bienvenida al usuario
+            AlertDialog.Builder(this)
+                .setTitle("¡Bienvenid@!")
+                .setMessage("Hola $nombreUsuario, has iniciado sesión correctamente en SmartLock.")
+                .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+                .show()
+        } else {
+            etLogin.visibility = View.VISIBLE
+            etLogout.visibility = View.GONE
+        }
 
         // Boton Puerta
         etPuerta.setOnClickListener {
@@ -148,12 +169,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Boton Logout
+        // Boton Cerrar Sesión
         etLogout.setOnClickListener {
-            val intent = Intent(this, loginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
+            AlertDialog.Builder(this)
+                .setTitle("Sesión Cerrada")
+                .setMessage("Has cerrado sesión correctamente.")
+                .setPositiveButton("Aceptar") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+
+            Toast.makeText(this, "Sesión cerrada correctamente", Toast.LENGTH_SHORT).show()
+
+            // Ocultar botón cerrar sesión y mostrar botón iniciar sesión
+            etLogin.visibility = View.VISIBLE
+            etLogout.visibility = View.GONE
+            esAdmin = false
         }
     }
 }

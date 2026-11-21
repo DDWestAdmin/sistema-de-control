@@ -45,11 +45,16 @@ class loginActivity : AppCompatActivity() {
                     if (!documentos.isEmpty) {
                         val doc = documentos.documents[0]
                         val esAdmin = doc.getBoolean("esAdmin")
-                            ?: (doc.getString("rol") == "admin" || correo.equals("Administrador", ignoreCase = true))
+                            ?: (doc.getString("rol") == "admin" || correo.equals("administrador@correo.cl", ignoreCase = true))
+                        val nombreUsuario = doc.getString("nombre")
+                            ?: doc.getString("usuario")
+                            ?: correo.substringBefore("@")
 
                         Toast.makeText(this, "Credenciales correctas", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java).apply {
                             putExtra("ES_ADMIN", esAdmin)
+                            putExtra("NOMBRE_USUARIO", nombreUsuario)
+                            putExtra("SESION_INICIADA", true)
                         }
                         startActivity(intent)
                         finish()
@@ -58,6 +63,8 @@ class loginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Credenciales correctas Administrador", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java).apply {
                             putExtra("ES_ADMIN", true)
+                            putExtra("NOMBRE_USUARIO", "Administrador")
+                            putExtra("SESION_INICIADA", true)
                         }
                         startActivity(intent)
                         finish()
@@ -71,6 +78,8 @@ class loginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Credenciales correctas Administrador", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java).apply {
                             putExtra("ES_ADMIN", true)
+                            putExtra("NOMBRE_USUARIO", "Administrador")
+                            putExtra("SESION_INICIADA", true)
                         }
                         startActivity(intent)
                         finish()
