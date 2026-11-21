@@ -16,7 +16,7 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:layout_marginBottom="24dp"/>
 
     <EditText
@@ -46,14 +46,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/orbitron_black"
-        android:text="Ingresar"/>
+        android:text="Ingresar"
+        android:layout_marginBottom="28dp"/>
 
     <Button
         android:id="@+id/etborrador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/orbitron_black"
-        android:text="Vacíar Campos"/>
+        android:text="Vacíar Campos"
+        android:layout_marginBottom="28dp"/>
 
     <Button
         android:id="@+id/etinicio"

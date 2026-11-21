@@ -12,18 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="HISTORIAL DE REGISTRO"
         android:fontFamily="@font/orbitron_black"
         android:textColor="@color/white"
         android:textSize="26dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="18dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginBottom="18dp">
+        android:layout_marginBottom="8dp">
 
         <TextView
             android:id="@+id/ethistorial"
@@ -40,5 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/orbitron_black"
-        android:text="Volver"/>
+        android:text="Volver"
+        android:layout_marginBottom="8dp"/>
 </LinearLayout>

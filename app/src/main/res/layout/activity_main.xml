@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:text="Gestor de Tarjetas"
         android:fontFamily="@font/orbitron_black"
-        android:layout_marginTop="18dp"/>
+        android:layout_marginTop="28dp"/>
 
     <Button
         android:id="@+id/etlogout"
@@ -60,6 +60,6 @@
         android:layout_height="wrap_content"
         android:text="Cerrar sesión"
         android:fontFamily="@font/orbitron_black"
-        android:layout_marginTop="18dp"/>
+        android:layout_marginTop="28dp"/>
 
 </LinearLayout>

@@ -26,7 +26,7 @@
         android:text="Historial de Tarjetas"
         android:fontFamily="@font/orbitron_black"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginBottom="28dp" />
 
     <Button
         android:id="@+id/etnuevatajeta"
@@ -35,7 +35,7 @@
         android:text="Nueva Tarjeta"
         android:fontFamily="@font/orbitron_black"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="18dp"/>
+        android:layout_marginBottom="28dp"/>
 
     <Button
         android:id="@+id/etborrartarjeta"
@@ -44,7 +44,7 @@
         android:text="Eliminar Tarjeta"
         android:fontFamily="@font/orbitron_black"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="18dp"/>
+        android:layout_marginBottom="28dp"/>
 
     <Button
         android:id="@+id/etvolver"
@@ -53,5 +53,5 @@
         android:text="Volver a Inicio"
         android:fontFamily="@font/orbitron_black"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginBottom="28dp" />
 </LinearLayout>

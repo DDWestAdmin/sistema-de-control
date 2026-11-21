@@ -17,7 +17,7 @@
         android:textSize="26dp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:layout_marginBottom="24dp"/>
 
     <EditText
@@ -62,7 +62,7 @@
         android:textColorHint="@color/white"
         android:fontFamily="@font/orbitron_black"
         android:inputType="text"
-        android:layout_marginBottom="18dp"/>
+        android:layout_marginBottom="28dp"/>
 
     <Button
         android:id="@+id/etguardar"
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:text="Guardar"
         android:fontFamily="@font/orbitron_black"
-        android:layout_marginBottom="18dp"/>
+        android:layout_marginBottom="28dp"/>
 
     <Button
         android:id="@+id/etvaciar"
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:text="Vaciar Campos"
         android:fontFamily="@font/orbitron_black"
-        android:layout_marginBottom="18dp"/>
+        android:layout_marginBottom="28dp"/>
 
     <Button
         android:id="@+id/etvolvertarjetas"
@@ -86,5 +86,5 @@
         android:layout_width="match_parent"
         android:text="Volver"
         android:fontFamily="@font/orbitron_black"
-        android:layout_marginBottom="18dp"/>
+        android:layout_marginBottom="28dp"/>
 </LinearLayout>
